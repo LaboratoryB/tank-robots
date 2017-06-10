@@ -20,37 +20,34 @@ function ioInit() {
 	ioInitialized = true
 }
 
-class Motor {
-	constructor(pwmPin, dirPin) {
-		this.pwmPin = pwmPin
-		this.dirPin = dirPin
-	}
-	setSpeed(speed) {
-		var dirValue
-		if(speed < 0) {
-			speed = -speed
-			dirValue = 1
-		} else {
-			dirValue = 0
-		}
-		ioInit()
-		wpi.digitalWrite(this.dirPin, dirValue)
-		wpi.pwmWrite(this.pwmPin, speed)
-	}
+function Motor(pwmPin, dirPin) {
+	this.pwmPin = pwmPin
+	this.dirPin = dirPin
 }
 
-class Motors {
-	constructor() {
-		this.motor1 = new Motor(12, 5)
-		this.motor2 = new Motor(13, 6)
+Motor.prototype.setSpeed(speed) {
+	var dirValue
+	if(speed < 0) {
+		speed = -speed
+		dirValue = 1
+	} else {
+		dirValue = 0
 	}
-	setSpeeds(m1Speed, m2Speed) {
-		this.motor1.setSpeed(m1Speed)
-		this.motor2.setSpeed(m2Speed)
-	}
+	ioInit()
+	wpi.digitalWrite(this.dirPin, dirValue)
+	wpi.pwmWrite(this.pwmPin, speed)
+}
+
+function Motors() {
+	this.motor1 = new Motor(12, 5)
+	this.motor2 = new Motor(13, 6)
+}
+Motors.prototype.setSpeeds(m1Speed, m2Speed) {
+	this.motor1.setSpeed(m1Speed)
+	this.motor2.setSpeed(m2Speed)
 }
 
 module.exports = {
-	motors: new Motors(),
+	motors: Motors(),
 	maxSpeed: maxSpeed
 }
