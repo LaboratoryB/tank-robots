@@ -1,0 +1,28 @@
+{
+  "name": "drv8835-motor-driver-rpi-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vwasteels/drv8835-motor-driver-rpi-node.git"
+  },
+  "keywords": [
+    "raspberry",
+    "node",
+    "motor",
+    "pololu"
+  ],
+  "author": "Vincent Wasteels",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vwasteels/drv8835-motor-driver-rpi-node/issues"
+  },
+  "homepage": "https://github.com/vwasteels/drv8835-motor-driver-rpi-node#readme",
+  "dependencies": {
+    "wiring-pi": "^2.2.1"
+  }
+}
