@@ -1,5 +1,5 @@
 const base     = require("./index.js");
-const motors   = base.motors();
+const motors   = new base.motors();
 const maxSpeed = require("./index.js").maxSpeed;
 
 console.log('motors',motors);
