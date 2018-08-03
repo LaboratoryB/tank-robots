@@ -1,50 +1,43 @@
-const wpi = require("wiring-pi")
+const pigpio = require('pigpio');
+const Gpio = pigpio.Gpio;
 
-const maxSpeed = 480
-let ioInitialized = false
+let ioInitialized = false;
+const maxSpeed = 255;
 
 function ioInit() {
-	if(ioInitialized) return
-
-	wpi.wiringPiSetupGpio()
-	wpi.pinMode(12, wpi.GPIO.PWM_OUTPUT)
-	wpi.pinMode(13, wpi.GPIO.PWM_OUTPUT)
-
-	wpi.pwmSetMode(wpi.GPIO.PWM_MODE_MS)
-	wpi.pwmSetRange(maxSpeed)
-	wpi.pwmSetClock(2)
-
-	wpi.pinMode(5, wpi.GPIO.OUTPUT)
-	wpi.pinMode(6, wpi.GPIO.OUTPUT)
-
-	ioInitialized = true
+	if(ioInitialized) return;
+	pigpio.configureClock(1, pigpio.CLOCK_PCM);
+	ioInitialized = true;
 }
 
 function Motor(pwmPin, dirPin) {
-	this.pwmPin = pwmPin
-	this.dirPin = dirPin
+	ioInit();
+	this.motor = new Gpio(pwmPin, {mode: Gpio.OUTPUT});
+	this.direction = new Gpio(dirPin, {mode: Gpio.OUTPUT});
 }
 
 Motor.prototype.setSpeed = function(speed) {
-	var dirValue
+	var dirValue;
 	if(speed < 0) {
-		speed = -speed
-		dirValue = 1
+		speed = -speed;
+		dirValue = 1;
 	} else {
-		dirValue = 0
+		dirValue = 0;
 	}
-	ioInit()
-	wpi.digitalWrite(this.dirPin, dirValue)
-	wpi.pwmWrite(this.pwmPin, speed)
+	if( speed > maxSpeed ) {
+		speed = 255;
+	}
+	this.direction.digitalWrite(dirValue);
+	this.motor.pwmWrite(speed);
 }
 
 function Motors() {
-	this.motor1 = new Motor(12, 5)
-	this.motor2 = new Motor(13, 6)
+	this.motor1 = new Motor(12, 5);
+	this.motor2 = new Motor(13, 6);
 }
-Motors.prototype.setSpeeds = function(m1Speed,m2Speed) {
-	this.motor1.setSpeed(m1Speed)
-	this.motor2.setSpeed(m2Speed)
+Motors.prototype.setSpeeds = function(m1Speed, m2Speed) {
+	this.motor1.setSpeed(m1Speed);
+	this.motor2.setSpeed(m2Speed);
 }
 
 module.exports = {
