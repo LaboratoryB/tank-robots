@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/vwasteels/drv8835-motor-driver-rpi-node#readme",
   "dependencies": {
+    "onoff": "^3.2.1",
     "wiring-pi": "^2.2.1"
   }
 }

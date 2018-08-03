@@ -25,7 +25,7 @@ function Motor(pwmPin, dirPin) {
 	this.dirPin = dirPin
 }
 
-Motor.prototype.setSpeed(speed) {
+Motor.prototype.setSpeed = function(speed) {
 	var dirValue
 	if(speed < 0) {
 		speed = -speed
@@ -42,7 +42,7 @@ function Motors() {
 	this.motor1 = new Motor(12, 5)
 	this.motor2 = new Motor(13, 6)
 }
-Motors.prototype.setSpeeds(m1Speed, m2Speed) {
+Motors.prototype.setSpeeds = function(m1Speed,m2Speed) {
 	this.motor1.setSpeed(m1Speed)
 	this.motor2.setSpeed(m2Speed)
 }
