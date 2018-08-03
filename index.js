@@ -1,11 +1,11 @@
 const wpi = require("wiring-pi")
 
 const maxSpeed = 480
-const ioInitialized = false
+let ioInitialized = false
 
 function ioInit() {
 	if(ioInitialized) return
-	
+
 	wpi.wiringPiSetupGpio()
 	wpi.pinMode(12, wpi.GPIO.PWM_OUTPUT)
 	wpi.pinMode(13, wpi.GPIO.PWM_OUTPUT)
