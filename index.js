@@ -41,6 +41,6 @@ Motors.prototype.setSpeeds = function(m1Speed, m2Speed) {
 }
 
 module.exports = {
-	motors: Motors(),
+	motors: Motors,
 	maxSpeed: maxSpeed
 }
