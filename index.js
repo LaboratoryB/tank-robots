@@ -116,7 +116,7 @@ Tank.prototype.parseCommand(command, intensity=1) {
 
 
 module.exports = {
-	tank: Tank,
+	Tank: Tank,
 	maxSpeed: maxSpeed,
 	tankSpeed: tankSpeed,
 	commandDuration: commandDuration
