@@ -4,6 +4,15 @@
 - pigpio 1.1.2
 - node 10.8.x
 
+## Connecting
+Hostnames:
+- `left-tank` - SD card marked "L"
+- `right-tank` - SD card marked "R"
+```
+ssh pi@left-tank
+ssh pi@right-tank
+```
+
 ## Building
 ```
 nvm install 10.8.0
