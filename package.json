@@ -1,14 +1,14 @@
 {
-  "name": "drv8835-motor-driver-rpi-node",
+  "name": "lab-b-tank-control",
   "version": "1.0.0",
-  "description": "",
+  "description": "Use Wi-Fi and Raspberry Pi Zero W's to control tanks.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "example": "run-example.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vwasteels/drv8835-motor-driver-rpi-node.git"
+    "url": "git+https://github.com/aaronsilber/tank-control.git"
   },
   "keywords": [
     "raspberry",
@@ -16,12 +16,9 @@
     "motor",
     "pololu"
   ],
-  "author": "Vincent Wasteels",
+  "author": "Aaron Silber and Greg Schoppe",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vwasteels/drv8835-motor-driver-rpi-node/issues"
-  },
-  "homepage": "https://github.com/vwasteels/drv8835-motor-driver-rpi-node#readme",
+  "homepage": "https://github.com/aaronsilber/tank-control#readme",
   "dependencies": {
     "pigpio": "^1.1.2"
   }
