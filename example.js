@@ -1,24 +1,16 @@
-const base     = require("./index.js");
-const motors   = new base.motors();
-const maxSpeed = base.maxSpeed;
+const tc_lib   = require("./index.js");
+const tank     = new tc_lib.Tank();
 
-console.log('motors',motors);
-
-let motor1 = motors.motor1;
-let motor2 = motors.motor2;
-console.log('motor1',motor1);
-console.log('motor2',motor2);
-
-let maxSafeSpeed = 175;
-let currentSpeed = 0;
-console.log('wait for first setSpeed command...');
+let i = 0;
+// Begin test of all functions
+// Note: stop will force an early termination of commands, if necessary. in most cases it can be replaced by a "skip turn"
+//       fire is not yet implemented
+let commands = ['forwards', 'stop', 'backwards', 'left', 'right', 'fire'];
 setInterval(() => {
-  if ( currentSpeed == maxSafeSpeed ) {
-    currentSpeed = 0;
-  } else {
-    currentSpeed = maxSafeSpeed;
-  }
-  console.log('setting new currentSpeed: ', currentSpeed);
-  motor1.setSpeed(currentSpeed);
-  motor2.setSpeed(currentSpeed);
-}, 2000);
+  tank.parseCommand( commands[c] );
+  i = ( i + 1 ) % commands.length;
+}, 3000);
+
+// TODO: add support for registering an enemy fire callback
+//       add support for registering a tank-disabled callback
+//       maybe add the ability for tanks to be partially
