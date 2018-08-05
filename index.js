@@ -83,35 +83,34 @@ Tank.prototype.fire() {
 	this.turret.fire(); // Note: unlike tread controls, fire is an action, not a state, and only occurs once
 }
 
-Tank.prototype.parseCommand(command, intensity=1) {
+Tank.prototype.parseCommand( command, intensity=1, callback=() => {} ) {
 	// Note: accepted commands are: stop,forwards,backwards,left,right,fire
 	// intensity allows us to optionally control duration, for finer aiming (range: 0-1)
 	let d = intensity * commandDuration;
 	switch(command) {
-		case "stop": // stop is rarely needed, since other commands terminate with a stop command
+		case "stop": // stop is rarely needed, since all commands terminate with a stop
 			this.stop();
 			break;
 		case "forwards":
 			this.forwards();
-			setTimeout( () => this.stop(), d );
 			break;
 		case "backwards":
 			this.backwards();
-			setTimeout( () => this.stop(), d );
 			break;
 		case "left":
 			this.left();
-			setTimeout( () => this.stop(), d );
 			break;
 		case "right":
 			this.right();
-			setTimeout( () => this.stop(), d );
 			break;
 		case "fire":
 			this.fire();
-			setTimeout( () => this.stop(), d );
 			break;
 	}
+	setTimeout( () => {
+		this.stop();
+		callback();
+	}, d );
 }
 
 
