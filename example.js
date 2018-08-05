@@ -1,5 +1,8 @@
 const tc_lib   = require("./index.js");
+const os       = require("os");
 const tank     = new tc_lib.Tank();
+const hostname = os.hostname();
+const endpoint = 'https://vtbots.com/wp-admin/admin-ajax.php';
 
 let i = 0;
 // Begin test of all functions
