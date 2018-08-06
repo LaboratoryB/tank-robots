@@ -19,7 +19,8 @@ let request_command = function() {
     tank.parseCommand( command, resolution, () => { request_command(); } );
   });
 }
+request_command();
 
 // TODO: add support for registering an enemy fire callback
 //       add support for registering a tank-disabled callback
-//       maybe add the ability for tanks to be partially
+//       maybe add the ability for tanks to be partially disabled
