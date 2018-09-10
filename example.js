@@ -11,11 +11,12 @@ let request_command = function() {
     let command = 'wait';
     let resolution = 1;
     if (err) {
-      console.log(err);
+      console.log("Error getting command: ", err);
     } else {
       command = body.command;
       resolution = body.resolution;
     }
+    console.log( "Response from server: got command ", command, " and resolution ", resolution );
     tank.parseCommand( command, resolution, () => { request_command(); } );
   });
 }
