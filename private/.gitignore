@@ -1,0 +1,3 @@
+# track this file but nothing in this directory
+*
+!.gitignore
