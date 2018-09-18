@@ -20,6 +20,7 @@
   "license": "ISC",
   "homepage": "https://github.com/aaronsilber/tank-control#readme",
   "dependencies": {
+    "lirc-client": "^2.0.0",
     "pigpio": "^1.1.2",
     "request": "^2.81.0"
   }
