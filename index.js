@@ -79,17 +79,30 @@ Tank.prototype.right = function() {
 	this.treads.setSpeeds( tankSpeed, -1*tankSpeed );
 }
 
-Tank.prototype.fire = function() {
+Tank.prototype.fire = function( callback=() => {} ) {
 	this.turret.fire(); // Note: unlike tread controls, fire is an action, not a state, and only occurs once
+	
+	// perform firing recoil animation
+	this.treads.setSpeeds( -1*tankSpeed, -1*tankSpeed );
+	setTimeout(function() {
+		this.treads.setSpeeds( tankSpeed, tankSpeed );
+		setTimeout(function() {
+			this.stop();
+			callback();
+		}, 250);
+	}, 250);
 }
 
 Tank.prototype.parseCommand = function( command, intensity=1, callback=() => {} ) {
 	// Note: accepted commands are: stop,forwards,backwards,left,right,fire
 	// intensity allows us to optionally control duration, for finer aiming (range: 0-1)
 	let d = intensity * commandDuration;
+	let do_callback = true;
 	switch(command) {
 		case "stop": // stop is rarely needed, since all commands terminate with a stop
+			do_callback = false;
 			this.stop();
+			callback();
 			break;
 		case "forwards":
 			this.forwards();
@@ -104,13 +117,16 @@ Tank.prototype.parseCommand = function( command, intensity=1, callback=() => {} 
 			this.right();
 			break;
 		case "fire":
-			this.fire();
+			do_callback = false;
+			this.fire(callback);
 			break;
 	}
-	setTimeout( () => {
-		this.stop();
-		callback();
-	}, d );
+	if(do_callback) {
+		setTimeout( () => {
+			this.stop();
+			callback();
+		}, d );
+	}
 }
 
 
