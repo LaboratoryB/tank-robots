@@ -2,20 +2,19 @@ const tc_lib   = require("./tank-control.js");
 const request  = require("request");
 const os       = require("os");
 const hostname = os.hostname();
-const endpoint = 'https://vtbots.com/wp-content/plugins/vtbots-tank-controller/fast-ajax.php';
 
 const Config   = require('./config.js');
 let config     = new Config('./private/config.json');
 let tank       = new tc_lib.Tank();
 
 let register_hit = function() {
-  let uri = endpoint + '?action=vtbots_tank_register_hit&hostname=' + hostname;
+  let uri = config.endpoint + '?action=vtbots_tank_register_hit&hostname=' + hostname + "&apikey=" + config.apikey;
   request(uri, { json: true }, (err, res, body) => {});
 }
 tank.set_hit_callback( register_hit );
 
 let request_command = function() {
-  let uri = endpoint + '?action=vtbots_tank_get_command&hostname=' + hostname;
+  let uri = config.endpoint + '?action=vtbots_tank_get_command&hostname=' + hostname + "&apikey=" + config.apikey;
   request(uri, { json: true }, (err, res, body) => {
     let command = 'wait';
     let resolution = 1;
