@@ -1,5 +1,6 @@
 const pigpio = require('pigpio');
 const Gpio = pigpio.Gpio;
+const Infrared = require('./infrared.js');
 
 let ioInitialized = false;
 const maxSpeed = 255; // this is the range the PWM library supports it may damage motors over time
@@ -43,12 +44,15 @@ Treads.prototype.setSpeeds = function(m1Speed, m2Speed) {
 }
 
 function Turret() {
-	// TODO: this is a stub for eventual firing control
+	this.infrared = new Infrared();
+	// initialize the IR send/receive
 }
 
 Turret.prototype.fire = function() {
-	// TODO: another stub for firing control
+	// send the "Fire" command over IR
 	// Note: unlike tread controls, fire is an action, not a state, and only occurs once when called
+	let infrared = this.infrared;
+	infrared.sendFireCommand();
 }
 
 // TODO: fire JavaScript event when hit registered

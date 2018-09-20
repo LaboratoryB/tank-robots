@@ -8,7 +8,7 @@ try {
       });
 
 
-      lirc.sendOnce('tank-robot', 'fire').catch(error => {
+      lirc.sendOnce('winix-5500', 'KEY_UP').catch(error => {
           if (error) console.log(error);
       });
   });
