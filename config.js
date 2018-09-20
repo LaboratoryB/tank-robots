@@ -42,7 +42,11 @@ class Config {
     if ( typeof tankConfig.general == 'undefined' ) {
       throw new Error('missing general config json');
     }
+    if ( typeof tankConfig.command_endpoint == 'undefined' ) {
+      throw new Error('missing command_endpoint in config');
+    }
     this.setConfig('general',tankConfig.general);
+    this.setConfig('command_endpoint',tankConfig.command_endpoint);
     console.log(module.data);
   }
 }
