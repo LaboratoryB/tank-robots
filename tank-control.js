@@ -102,13 +102,13 @@ Tank.prototype.fire = function( callback=() => {} ) {
 
 	// perform firing recoil animation
 	this.treads.setSpeeds( -1*tankSpeed, -1*tankSpeed );
-	setTimeout(function() {
+	setTimeout(()=>{
 		this.treads.setSpeeds( tankSpeed, tankSpeed );
-		setTimeout(function() {
+		setTimeout(()=>{
 			this.stop();
 			callback();
-		}.bind(this), 250);
-	}.bind(this), 250);
+		}, 250);
+	}, 250);
 }
 
 Tank.prototype.parseCommand = function( command, intensity=1, callback=() => {} ) {
