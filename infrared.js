@@ -1,5 +1,7 @@
 "use strict";
 
+const EventEmitter = require('events');
+
 class Infrared extends EventEmitter {
   constructor(lircdPath) {
     this.lircdPath = lircdPath;
