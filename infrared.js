@@ -23,7 +23,7 @@ class Infrared extends EventEmitter {
   receiveCommand(remote, button, repeat) {
     console.log('button ' + button + ' on remote ' + remote + ' was pressed! (repeat ' + repeat + ')');
     if (remote != this.remote) {
-      console.log('ignoring this command, doesn\'t match the correct remote');
+      console.log('ignoring this command from remote ' + remote + ', doesn\'t match the correct remote');
       return;
     }
     if (button != this.fireButton) {
@@ -50,7 +50,7 @@ class Infrared extends EventEmitter {
             console.log('LIRC Version', res);
         });
       });
-      lirc.on('receive', this.receiveCommand);
+      lirc.on('receive', this.receiveCommand.bind(this));
     } catch (e) {
       console.err('Error connecting to lircd: ',e);
     }
