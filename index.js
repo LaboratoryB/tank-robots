@@ -9,14 +9,16 @@ let tank       = new tc_lib.Tank();
 
 let register_hit = function() {
   let endpoint = config.getConfig('command_endpoint');
-  let uri = endpoint + '?action=vtbots_tank_register_hit&hostname=' + hostname + "&apikey=" + config.apikey;
+  let apikey   = config.getConfig('api_key');
+  let uri = endpoint + '?action=vtbots_tank_register_hit&hostname=' + hostname + "&apikey=" + apikey;
   request(uri, { json: true }, (err, res, body) => {});
 }
 tank.set_hit_callback( register_hit );
 
 let request_command = function() {
   let endpoint = config.getConfig('command_endpoint');
-  let uri = endpoint + '?action=vtbots_tank_get_command&hostname=' + hostname + "&apikey=" + config.apikey;
+  let apikey   = config.getConfig('api_key');
+  let uri = endpoint + '?action=vtbots_tank_get_command&hostname=' + hostname + "&apikey=" + apikey;
   request(uri, { json: true }, (err, res, body) => {
     let command = 'wait';
     let resolution = 1;
