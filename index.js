@@ -29,7 +29,3 @@ let request_command = function() {
   });
 }
 request_command();
-
-// TODO: add support for registering an enemy fire callback (and sending to server)
-//       add support for registering a tank-disabled callback (and sending to server)
-//       maybe add the ability for tanks to be partially disabled?
