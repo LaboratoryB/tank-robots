@@ -35,7 +35,7 @@ Motor.prototype.setSpeed = function(speed) {
 }
 
 function Treads() {
-	this.motor1 = new Motor(12, 5);
+	this.motor1 = new Motor(12, 14); // moved motor1 dir from BCM 5 to BCM 14
 	this.motor2 = new Motor(13, 6);
 }
 Treads.prototype.setSpeeds = function(m1Speed, m2Speed) {
