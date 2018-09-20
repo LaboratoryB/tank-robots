@@ -45,6 +45,9 @@ Treads.prototype.setSpeeds = function(m1Speed, m2Speed) {
 
 function Turret() {
 	this.infrared = new Infrared('/var/run/lirc/lircd');
+	this.infrared.on('hit',() => {
+		console.log("Turret detected being hit.");
+	});
 	// initialize the IR send/receive
 }
 

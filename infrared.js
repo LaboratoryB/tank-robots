@@ -1,6 +1,6 @@
 "use strict";
 
-class Infrared {
+class Infrared extends EventEmitter {
   constructor(lircdPath) {
     this.lircdPath = lircdPath;
     this.connectLircd();
@@ -17,8 +17,9 @@ class Infrared {
   receiveCommand(remote, button, repeat) {
     if (remote == getRemote() && button == getFireButton()) {
       console.log('you sunk my battleship! fire button was pressed!');
+      this.emit('hit');
     }
-    console.log('button ' + button + ' on remote ' + remote + ' was pressed! (repeat: ' + repeat + ')');
+    console.log('button ' + button + ' on remote ' + remote + ' was pressed! (repeat ' + repeat + ')');
   }
   getRemote() {
     return 'lab-b-robot-tank';
