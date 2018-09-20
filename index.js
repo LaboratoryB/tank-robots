@@ -8,6 +8,11 @@ const Config   = require('./config.js');
 let config     = new Config('./private/config.json');
 let tank       = new tc_lib.Tank();
 
+let register_hit = function() {
+  let uri = endpoint + '?action=vtbots_tank_register_hit&hostname=' + hostname;
+  request(uri, { json: true }, (err, res, body) => {});
+}
+
 let request_command = function() {
   let uri = endpoint + '?action=vtbots_tank_get_command&hostname=' + hostname;
   request(uri, { json: true }, (err, res, body) => {
