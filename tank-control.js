@@ -107,8 +107,8 @@ Tank.prototype.fire = function( callback=() => {} ) {
 		setTimeout(function() {
 			this.stop();
 			callback();
-		}, 250);
-	}, 250);
+		}.bind(this), 250);
+	}.bind(this), 250);
 }
 
 Tank.prototype.parseCommand = function( command, intensity=1, callback=() => {} ) {
