@@ -4,6 +4,7 @@ const EventEmitter = require('events');
 
 class Infrared extends EventEmitter {
   constructor(lircdPath) {
+    super();
     this.lircdPath = lircdPath;
     this.connectLircd();
   }
