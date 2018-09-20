@@ -22,11 +22,11 @@ class Infrared extends EventEmitter {
   }
   receiveCommand(remote, button, repeat) {
     console.log('button ' + button + ' on remote ' + remote + ' was pressed! (repeat ' + repeat + ')');
-    if (remote != this.remote) {
+    if (remote !== this.remote) {
       console.log('ignoring this command, doesn\'t match the correct remote');
       return;
     }
-    if (button != this.fireButton) {
+    if (button !== this.fireButton) {
       console.log('not the fire button.');
     } else {
       console.log('you sunk my battleship! fire button was pressed!');
