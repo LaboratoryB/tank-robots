@@ -3,7 +3,7 @@
 class Infrared {
   constructor(lircdPath) {
     this.lircdPath = lircdPath;
-    connectLircd();
+    this.connectLircd();
   }
   sendFireCommand() {
     return this.sendCommand('KEY_POWER');
