@@ -46,9 +46,11 @@ Treads.prototype.setSpeeds = function(m1Speed, m2Speed) {
 function Turret() {
 	// initialize the IR send/receive
 	this.infrared = new Infrared('/var/run/lirc/lircd');
-	this.infrared.on('hit',() => {
+	this.cb = () => {
 		console.log("Turret detected being hit.");
-		// do other interesting stuff here, like deducting health
+	};
+	this.infrared.on('hit',() => {
+		this.cb();
 	});
 }
 
@@ -59,12 +61,20 @@ Turret.prototype.fire = function() {
 	infrared.sendFireCommand();
 }
 
+Turret.prototype.set_hit_callback = function( cb = ()=>{} ) {
+	this.cb = cb;
+}
+
 // TODO: fire JavaScript event when hit registered
 // TODO: fire JavaScript event when destroyed
 
 function Tank() {
 	this.treads = new Treads();
 	this.turret = new Turret();
+}
+
+Tank.prototype.set_hit_callback( cb = ()=>{} ) {
+	this.turret.set_hit_callback( cb );
 }
 
 Tank.prototype.stop = function() {
