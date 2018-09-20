@@ -26,7 +26,7 @@ class Infrared extends EventEmitter {
       console.log('ignoring this command from remote ' + remote + ', doesn\'t match the correct remote');
       return;
     }
-    if (button != this.fireButton) {
+    if (button !== this.fireButton) {
       console.log('not the fire button.');
     } else {
       console.log('you sunk my battleship! fire button was pressed!');
