@@ -5,30 +5,27 @@ const EventEmitter = require('events');
 class Infrared extends EventEmitter {
   constructor(lircdPath) {
     super();
+    this.connected = false;
     this.lircdPath = lircdPath;
+    this.remote = 'lab-b-tank-robot';
+    this.fireButton = 'KEY_POWER';
     this.connectLircd();
   }
   sendFireCommand() {
-    return this.sendCommand(this.getFireButton());
+    return this.sendCommand(this.fireButton);
   }
   sendCommand(command) {
     // command should be a lirc key, like KEY_POWER or KEY_UP
-    lirc.sendOnce(this.getRemote(), command).catch(error => {
+    lirc.sendOnce(this.remote, command).catch(error => {
       if (error) console.log(error);
     });
   }
   receiveCommand(remote, button, repeat) {
-    if (remote == this.getRemote() && button == this.getFireButton()) {
+    if (remote == this.remote && button == this.fireButton) {
       console.log('you sunk my battleship! fire button was pressed!');
       this.emit('hit');
     }
     console.log('button ' + button + ' on remote ' + remote + ' was pressed! (repeat ' + repeat + ')');
-  }
-  getRemote() {
-    return 'lab-b-robot-tank';
-  }
-  getFireButton() {
-    return 'KEY_POWER';
   }
   connectLircd() {
     if (typeof this.connected != 'undefined' && this.connected) {
