@@ -45,8 +45,12 @@ class Config {
     if ( typeof tankConfig.command_endpoint == 'undefined' ) {
       throw new Error('missing command_endpoint in config');
     }
+    if ( typeof tankConfig.api_key == 'api_key' ) {
+      throw new Error('missing api_key');
+    }
     this.setConfig('general',tankConfig.general);
     this.setConfig('command_endpoint',tankConfig.command_endpoint);
+    this.setConfig('api_key',tankConfig.api_key);
     console.log(module.data);
   }
 }
