@@ -73,7 +73,7 @@ function Tank() {
 	this.turret = new Turret();
 }
 
-Tank.prototype.set_hit_callback( cb ) {
+Tank.prototype.set_hit_callback = function( cb ) {
 	this.turret.set_hit_callback( cb );
 }
 
