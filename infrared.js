@@ -16,6 +16,7 @@ class Infrared extends EventEmitter {
   }
   sendCommand(command) {
     // command should be a lirc key, like KEY_POWER or KEY_UP
+    let lirc = this.lirc;
     lirc.sendOnce(this.remote, command).catch(error => {
       if (error) console.log(error);
     });
