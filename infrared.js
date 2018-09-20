@@ -18,7 +18,7 @@ class Infrared extends EventEmitter {
     });
   }
   receiveCommand(remote, button, repeat) {
-    if (remote == getRemote() && button == getFireButton()) {
+    if (remote == this.getRemote() && button == this.getFireButton()) {
       console.log('you sunk my battleship! fire button was pressed!');
       this.emit('hit');
     }
