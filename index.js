@@ -12,6 +12,7 @@ let register_hit = function() {
   let uri = endpoint + '?action=vtbots_tank_register_hit&hostname=' + hostname;
   request(uri, { json: true }, (err, res, body) => {});
 }
+tank.set_hit_callback( register_hit );
 
 let request_command = function() {
   let uri = endpoint + '?action=vtbots_tank_get_command&hostname=' + hostname;
