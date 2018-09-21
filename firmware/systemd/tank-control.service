@@ -1,0 +1,16 @@
+[Unit]
+Description=Tank Control
+After=
+Requires=
+
+[Service]
+User=root
+Group=root
+TimeoutStartSec=0
+Restart=always
+#StandardInput=tty-force
+WorkingDirectory=/home/pi/tank-control/firmware
+ExecStart=/home/pi/.nvm/versions/node/v10.8.0/bin/node index.js
+
+[Install]
+WantedBy=multi-user.target
