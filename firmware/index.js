@@ -13,6 +13,7 @@ let register_hit = function() {
   let apikey     = config.getConfig('api_key');
   let uri = endpoint + '?action=vtbots_tank_register_hit&hostname=' + hostname + "&apikey=" + apikey;
   request(uri, { json: true }, (err, res, body) => {});
+  tank.register_hit();
 }
 tank.set_hit_callback( register_hit );
 
@@ -30,7 +31,7 @@ let request_command = function() {
       resolution = body.resolution;
       console.log( "Response from server: got command ", command, " and resolution ", resolution );
     }
-    tank.parseCommand( command, resolution, () => { 
+    tank.parseCommand( command, resolution, () => {
       setTimeout( ()=>{ request_command(); }, requestDelay );
     } );
   });

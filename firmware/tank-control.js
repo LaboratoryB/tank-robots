@@ -112,6 +112,19 @@ Tank.prototype.fire = function( callback=() => {} ) {
 	}, 250);
 }
 
+Tank.prototype.register_hit = function( callback=() => {} ) {
+	let d = Math.round( Math.random() ) - 1;
+	// perform hit animation
+	this.treads.setSpeeds( -1 * d * tankSpeed, d * tankSpeed );
+	setTimeout(()=>{
+		this.treads.setSpeeds( d * tankSpeed, -1 * d * tankSpeed );
+		setTimeout(()=>{
+			this.stop();
+			callback();
+		}, 100);
+	}, 100);
+}
+
 Tank.prototype.parseCommand = function( command, intensity=1, callback=() => {} ) {
 	// Note: accepted commands are: stop,forwards,backwards,left,right,fire
 	// intensity allows us to optionally control duration, for finer aiming (range: 0-1)
