@@ -6,6 +6,7 @@ let ioInitialized = false;
 const maxSpeed = 255; // this is the range the PWM library supports it may damage motors over time
 const tankSpeed = 100; // this is the PWM setting we'll be using live, to protect the motors
 const commandDuration = 1000; // how long will each command run, in milliseconds
+const turnMultiplier = .333; // turns need smaller intervals than forward motion
 
 function ioInit() {
 	if(ioInitialized) return;
@@ -86,22 +87,22 @@ Tank.prototype.forwards = function() {
 }
 
 Tank.prototype.backwards = function() {
-	this.treads.setSpeeds( -1*tankSpeed, -1*tankSpeed );
+	this.treads.setSpeeds( -1 * tankSpeed, -1 * tankSpeed );
 }
 
 Tank.prototype.left = function() {
-	this.treads.setSpeeds( -1*tankSpeed, tankSpeed );
+	this.treads.setSpeeds( -1 * tankSpeed * turnMultiplier, tankSpeed * turnMultiplier );
 }
 
 Tank.prototype.right = function() {
-	this.treads.setSpeeds( tankSpeed, -1*tankSpeed );
+	this.treads.setSpeeds( tankSpeed * turnMultiplier, -1 * tankSpeed * turnMultiplier );
 }
 
 Tank.prototype.fire = function( callback=() => {} ) {
 	this.turret.fire(); // Note: unlike tread controls, fire is an action, not a state, and only occurs once
 
 	// perform firing recoil animation
-	this.treads.setSpeeds( -1*tankSpeed, -1*tankSpeed );
+	this.treads.setSpeeds( -1 * tankSpeed, -1 * tankSpeed );
 	setTimeout(()=>{
 		this.treads.setSpeeds( tankSpeed, tankSpeed );
 		setTimeout(()=>{
@@ -152,5 +153,6 @@ module.exports = {
 	Tank: Tank,
 	maxSpeed: maxSpeed,
 	tankSpeed: tankSpeed,
-	commandDuration: commandDuration
+	commandDuration: commandDuration,
+	turnMultiplier: turnMultiplier
 }
