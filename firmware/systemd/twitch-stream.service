@@ -11,6 +11,7 @@ Restart=always
 #StandardInput=tty-force
 WorkingDirectory=/home/pi/tank-control/firmware
 ExecStart=/home/pi/tank-control/firmware/start-stream.sh "${RTMP_ENDPOINT}"
+ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
 WantedBy=multi-user.target
