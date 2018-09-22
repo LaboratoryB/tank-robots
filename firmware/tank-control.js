@@ -23,11 +23,12 @@ function Motor(pwmPin, dirPin) {
 Motor.prototype.setSpeed = function(speed) {
 	var dirValue;
 	if(speed < 0) {
-		speed = -speed;
+		speed = -1 * speed;
 		dirValue = 1;
 	} else {
 		dirValue = 0;
 	}
+	speed = parseInt( speed );
 	if( speed > maxSpeed ) {
 		speed = 255;
 	}

@@ -1,5 +1,12 @@
 <?php if(!defined('ABSPATH')) { die(); }
-/* Plugin Name: VTBots Tank Controller */
+/*
+Plugin Name: VTBots Tank Controller
+Plugin URI: https://vtbots.com/tank-battle/
+Description: Provides a control interface and user management for Laser Tag Tanks
+Version: 1.0.0
+Author: Laboratory B
+Author URI: https://laboratoryb.org
+*/
 
 
 if( !class_exists('VTBTank') ) {
@@ -345,7 +352,7 @@ if( !class_exists('VTBTank') ) {
 				}
 				$message = "New Game Starting NOW!";
 				$this->send_event( null, $message, time()+$i );
-			} else {
+			} elseif( $score ) {
 				foreach( $this->teams as $cur_team => $cur_team_data ) {
 					if( $team == $cur_team ) {
 						$message = "Your tank has been hit! Take evasive action!";
