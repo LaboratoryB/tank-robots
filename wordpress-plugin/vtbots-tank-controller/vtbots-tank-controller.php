@@ -345,7 +345,7 @@ if( !class_exists('VTBTank') ) {
 				}
 				$message = "New Game Starting NOW!";
 				$this->send_event( null, $message, time()+$i );
-			} else {
+			} elseif( $score ) {
 				foreach( $this->teams as $cur_team => $cur_team_data ) {
 					if( $team == $cur_team ) {
 						$message = "Your tank has been hit! Take evasive action!";
