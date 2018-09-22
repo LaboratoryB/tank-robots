@@ -1,5 +1,12 @@
 <?php if(!defined('ABSPATH')) { die(); }
-/* Plugin Name: VTBots Tank Controller */
+/*
+Plugin Name: VTBots Tank Controller
+Plugin URI: https://vtbots.com/tank-battle/
+Description: Provides a control interface and user management for Laser Tag Tanks
+Version: 1.0.0
+Author: Laboratory B
+Author URI: https://laboratoryb.org
+*/
 
 
 if( !class_exists('VTBTank') ) {
