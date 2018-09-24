@@ -32,7 +32,7 @@ if( !class_exists('VTBTank') ) {
 		protected $event_table_name = 'vtbots_tank_events';
 
 		// fill in to block local IP from viewing stream
-		protected $event_local_ip = "";
+		protected $event_local_ips = array();
 
 		public static function Instance() {
 			static $instance = null;
@@ -239,7 +239,7 @@ if( !class_exists('VTBTank') ) {
 		}
 
 		public function viewer_is_local_ip() {
-			if( $this->get_client_IP() == $this->event_local_ip ) {
+			if( in_array( $this->get_client_IP(), $this->event_local_ips ) ) {
 				return true;
 			}
 			return false;
@@ -475,15 +475,17 @@ if( !class_exists('VTBTank') ) {
 		}
 
 		protected function get_client_IP() {
+			$ips = '';
 			if( array_key_exists( 'HTTP_X_FORWARDED_FOR', $_SERVER ) ){
-				return  $_SERVER["HTTP_X_FORWARDED_FOR"];
+				$ips = $_SERVER["HTTP_X_FORWARDED_FOR"];
 			} elseif( array_key_exists( 'REMOTE_ADDR', $_SERVER ) ) {
-				return $_SERVER["REMOTE_ADDR"];
+				$ips = $_SERVER["REMOTE_ADDR"];
 			} elseif( array_key_exists( 'HTTP_CLIENT_IP', $_SERVER ) ) {
-				return $_SERVER["HTTP_CLIENT_IP"];
+				$ips = $_SERVER["HTTP_CLIENT_IP"];
 			}
+			$ips = explode(',', $ips);
 
-			return '';
+			return $ips[0];
 		}
 	}
 	VTBTank::Instance();
